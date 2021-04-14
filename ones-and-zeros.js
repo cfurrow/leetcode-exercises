@@ -26,56 +26,27 @@ Explanation: The largest subset is {"0", "1"}, so the answer is 2.
  * @return {number}
  */
 var findMaxForm = function(strs, m, n) {
-  // build every combination of values in strs
-  // validate each combination
-  // score each combination
-  let sets = { };
-  sets[strs.length] = strs; // add the original as a set
+  var sets = [];
 
-  
-  let setSize = 2;
-  // first loop, make sets of 2
-  // second loop, make sets of 3
-  // ...
-  // last loop, make sets of n-1 (max set that is not the original set)
-  for(; setSize < strs.length; setSize++) {
-    for(var baseSetStart = 0; baseSetStart < strs.length - setSize; baseSetStart++) {
-      let baseSet = strs.slice(baseSetStart, setSize);
-      sets[setSize] = [];
-
-      for(var i = 0; i < strs.length; i++) {
-        var current = strs[i];
-        if(baseSet.indexOf(current) >= 0) {
-          // do not include values we already have in the baseSet
-          continue;
+  for(var i = 1; i <= strs.length; i++) {
+    var setSize = i;
+    for(var j = 0; j < strs.length; j++) {
+      var currentIndex = j;
+      var tmp = [];
+      tmp.push(strs[currentIndex]);
+      for(var k = 0; k < strs.length; k++) {
+        if(tmp.indexOf(strs[k]) < 0 && tmp.length + 1 <= setSize) {
+          tmp.push(strs[k])
         }
-
-        sets[setSize].push( baseSet.concat([current]) );
       }
+      sets.push(tmp);
     }
   }
-  
-  console.log(sets);
+
+  console.log("sets", sets)
+  console.log("sets.length", sets.length)
+
 };
-
-// ["10","0001","111001","1","0"]
-
-// sets of 3
-// ["10", "0001", "111001"]
-// ["10", "0001", "1"]
-// ["10", "0001", "0"]
-// ["10", "111001", "0001"] // we already have this set
-// ["10", "111001", "1"]
-// ["10", "111001", "0"]
-// ["10", "1", "0001"] // we already have this set
-// ["10", "1", "111001"] // we already have this one
-// ["10", "1", "0"]
-// ["0001", "10", "111001"] // dupe
-// ["0001", "10", "1"] //dupe
-// ["0001", "10", "0"] //dupe
-// ["0001", "111001", "10"] // dupe
-// ["0001", "111001", "1"]
-// ["0001", "111001", "0"]
 
 assert( findMaxForm(["10","0001","111001","1","0"], 5, 3), 4 );
 assert( findMaxForm(["10","0","1"], 1, 1), 2 );
