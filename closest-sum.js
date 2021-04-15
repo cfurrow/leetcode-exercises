@@ -27,7 +27,7 @@ const findClosestPair = (arrayA, arrayB, target) => {
 
   let sum = null;
   let closestSum = null;
-  let pair = [ arrayA[0], arrayB[0] ];
+  let pair = [];
   for(let i = 0; i < arrayA.length; i++) {
     for(let j = 0; j < arrayB.length; j++) {
       sum = helper(arrayA, arrayB, target, i, j, [i,j])
