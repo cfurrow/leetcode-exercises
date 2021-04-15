@@ -17,12 +17,35 @@
 
 const findClosestPair = (arrayA, arrayB, target) => {
   
+  const helper = (arrayA, arrayB, target, indexA, indexB) => {
+    const valA = arrayA[indexA];
+    const valB = arrayB[indexB];
+    const sum = valA + valB;
+    const delta = Math.abs(target - sum);
+    return delta;
+  }
+
+  let sum = null;
+  let closestSum = null;
+  let pair = [ arrayA[0], arrayB[0] ];
+  for(let i = 0; i < arrayA.length; i++) {
+    for(let j = 0; j < arrayB.length; j++) {
+      sum = helper(arrayA, arrayB, target, i, j, [i,j])
+      if( closestSum == null || sum < closestSum ) {
+        pair = [ arrayA[i], arrayB[j] ];
+      }
+    }
+  }
+
+  return pair;
 }
 
 
 const assert = (value, expected) => {
-  if( value != expected) {
+  if( value[0] != expected[0] && value[1] != expected[1]) {
     throw `[${value}] did not equal the expected value of [${expected}]!`;
+  } else {
+    console.log(`✅ That worked!`)
   }
 }
 
