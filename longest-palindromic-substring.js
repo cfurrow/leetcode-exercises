@@ -52,6 +52,7 @@ var isPalindrome = (s) => {
 var longestPalindrome = function(s) {
   let longest = s[0];
   
+  // TODO: i does not have to go all the way to s.length... can it stop much sooner?
   for(let i = 0; i < s.length; i++) {
     for(let j = i; j < s.length; j++) {
       // skip if current diff is going to be shorter than pre-determined longest
