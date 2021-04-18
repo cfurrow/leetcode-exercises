@@ -53,20 +53,29 @@ var findMaxForm = function(strs, m, n) {
     console.log({s, zeroes, ones})
     for(var i = m; i > zeroes - 1; i--) {
       for(var j = n; j > ones - 1; j--) {
-        //console.log(`dp[${i}][${j}]: ${dp[i][j]} versus dp[${i}-${zeroes}][${j}-${ones}]+1 (dp[${i-zeroes}][${j-ones}]): ${dp[i-zeroes][j-ones]+1}`)
-        console.log(`Find the max`)
+        console.log(`Comparing dp[${i}][${j}] to dp[${i-zeroes}][${j-ones}]`)
+        if(dp[i][j] >= dp[i-zeroes][j-ones] + 1) {
+          console.log(`  dp[${i}][${j}]: Taking the value of dp[${i}][${j}]: ${dp[i][j]}`)
+        } else {
+          console.log(`  dp[${i}][${j}]: Taking the value of dp[${i-zeroes}][${j-ones}]: ${dp[i-zeroes][j-ones] + 1}`)
+        }
+
         dp[i][j] = Math.max(dp[i][j], dp[i-zeroes][j-ones] + 1);
+        
+        // if(i==m && j==n) {
+        //   console.log(`dp[${i}][${j}]`, {"dp[i][j]": dp[i][j], "dp[i-zeroes][j-ones]": dp[i-zeroes][j-ones] })
+        // }
       }
     }
   } );
 
-  //console.log(dp);
+  console.log(dp);
 
   return dp[m][n];
 };
 
-// assert( findMaxForm(["10","0001","111001","1","0"], 5, 3), 4 );
-assert( findMaxForm(["10","0","1"], 1, 1), 2 );
+assert( findMaxForm(["10","0001","111001","1","0"], 5, 3), 4 );
+//assert( findMaxForm(["10","0","1"], 1, 1), 2 );
 
 function assert(value, expected) {
   if(value != expected) {

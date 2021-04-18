@@ -53,7 +53,7 @@ var longestPalindrome = function(s) {
   let longest = s[0];
   
   for(let i = 0; i < s.length; i++) {
-    for(let j = 0; j < s.length; j++) {
+    for(let j = i; j < s.length; j++) {
       // skip if current diff is going to be shorter than pre-determined longest
       if(longest.length > 0 && j-i < longest.length) {
         continue;
