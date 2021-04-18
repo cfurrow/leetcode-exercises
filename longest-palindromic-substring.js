@@ -54,6 +54,10 @@ var longestPalindrome = function(s) {
   
   for(let i = 0; i < s.length; i++) {
     for(let j = 0; j < s.length; j++) {
+      // skip if current diff is going to be shorter than pre-determined longest
+      if(longest.length > 0 && j-i < longest.length) {
+        continue;
+      }
       let test = s.substring(i, j+1);
       //console.log({test, "ispal": isPalindrome(test), longest: test.length > longest.length })
       if( isPalindrome(test) && test.length > longest.length ){
