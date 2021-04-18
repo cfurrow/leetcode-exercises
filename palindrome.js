@@ -28,21 +28,32 @@ const isPalindrome = (s) => {
   s = s.toLowerCase();
   let start = 0;
   let end = s.length-1;
+  
   if(s.length == 0 || s.length == 1) {
     return true;
   }
-
-  console.log("new string: ", s);
-  
-  while(start <= end && s[start] == s[end]) {
-    start++;
-    end--;
+  let half = Math.ceil(end / 2);
+  let palindrome = false
+  for(let i = 0; i<half; i++) {
+    if(s[i] == s[end-i]) {
+      palindrome = true;
+    } else {
+      palindrome = false;
+      break;
+    }
   }
-
-  return start >= end;
+  
+  
+  return palindrome;
 };
-
 
 
 console.log(`isPalindrome("A man, a plan, a canal: Panama"): ${isPalindrome("A man, a plan, a canal: Panama")}`)
 console.log(`isPalindrome("race a car"): ${isPalindrome("race a car")}`)
+console.log(`isPalindrome("0 P"): ${isPalindrome("0 P")}`)
+console.log(`isPalindrome("aa"): ${isPalindrome("aa")}`)
+console.log(`isPalindrome("a"): ${isPalindrome("a")}`)
+console.log(`isPalindrome(""): ${isPalindrome("")}`)
+console.log(`isPalindrome("car wash me"): ${isPalindrome("car wash mer")}`)
+console.log(`isPalindrome("abcdcba"): ${isPalindrome("abcdcba")}`)
+console.log(`isPalindrome(",; W;:GlG:;l ;,"): ${isPalindrome(",; W;:GlG:;l ;,")} (should be false)`)
